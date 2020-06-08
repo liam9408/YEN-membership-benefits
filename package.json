@@ -1,0 +1,19 @@
+{
+  "name": "yen-membership-benefits",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liam9408/YEN-membership-benefits.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liam9408/YEN-membership-benefits/issues"
+  },
+  "homepage": "https://github.com/liam9408/YEN-membership-benefits#readme"
+}

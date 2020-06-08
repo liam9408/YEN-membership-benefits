@@ -1,0 +1,2 @@
+export const GETALL = "BENEFITSGETALL";
+export const REFRESH = "REFRESHBENEFITS";
