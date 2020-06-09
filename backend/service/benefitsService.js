@@ -40,6 +40,20 @@ class BenefitsService {
         });
     });
   }
+  editDescription(benefitId, newDescription){
+    return new Promise(async (resolve, reject) => {
+      let descriptionChange = this.knex('benefits')
+        .where('id', benefitId)
+        .update({ benefit_description: newDescription });
+        descriptionChange
+        .then(() => {
+          resolve({ success: 1, newDescription: newDescription });
+        })
+        .catch(err => {
+          reject({ success: 0, error: 'Benefit description could not be updated' });
+        });
+    });
+  }
 }
 
 module.exports = BenefitsService;
