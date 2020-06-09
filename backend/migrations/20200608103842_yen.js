@@ -21,5 +21,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTable("user").dropTable("images").dropTable("texts");
+  return knex.schema.dropTable("members").dropTable("benefits");
 };

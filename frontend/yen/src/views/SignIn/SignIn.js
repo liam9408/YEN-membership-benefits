@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link as RouterLink } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import * as authActions from "../../store/actions/auth/authActions";
@@ -41,6 +40,11 @@ const SignIn = (props) => {
   return (
     <>
       <h1>Sign In</h1>
+      <form onSubmit={handleSignIn}>
+        <input label="Email address" name="email" placeholder="email"></input>
+        <input label="Password" name="password" placeholder="password"></input>
+        <button type="submit">Log In</button>
+      </form>
     </>
   );
 };

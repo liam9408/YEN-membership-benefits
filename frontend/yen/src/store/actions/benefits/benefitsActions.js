@@ -8,10 +8,14 @@ export function refreshBenefitsThunk(benefits) {
   };
 }
 
-export function loadBenefits() {
+export function loadBenefits(token) {
   return (dispatch) => {
-    return axios(`${process.env.REACT_APP_API_SERVER}/benefits/list/all`)
+    console.log("ran");
+    return axios(`${process.env.REACT_APP_API_SERVER}/benefits/list/all`, {
+      token: token,
+    })
       .then((res) => {
+        console.log(res);
         dispatch(refreshBenefitsThunk(res.data));
       })
       .catch((err) => {

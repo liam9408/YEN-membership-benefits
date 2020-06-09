@@ -30,7 +30,7 @@ const Routes = (props) => {
           layout={NormalLayout}
           path="/not-found"
         />
-        <Redirect to="/not-found" />
+        <Redirect to="/home" />
       </Switch>
     );
   } else {
