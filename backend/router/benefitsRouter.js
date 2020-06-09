@@ -24,6 +24,7 @@ class BenefitsRouter {
   router() {
     let router = express.Router();
     router.get('/list/all', verifyToken, this.listAll.bind(this));
+    router.post('/add-benefit', verifyToken, this.addBenefit.bind(this));
     router.put('/edit-title', verifyToken, this.editTitle.bind(this));
     router.put(
       '/edit-description',
@@ -31,6 +32,7 @@ class BenefitsRouter {
       this.editDescription.bind(this)
     );
     router.put('/edit-activity', verifyToken, this.editActivity.bind(this));
+    
     return router;
   }
 
@@ -45,6 +47,31 @@ class BenefitsRouter {
           .listAll(req.params.userid)
           .then((data) => res.json(data))
           .catch((err) => res.status(500).json(err));
+      }
+    });
+  }
+  addBenefit(req, res) {
+    jwt.verify(req.token, process.env.JWT_SECRET, (err) => {
+      if (err) {
+        res.sendStatus(403);
+      } else {
+        let userID = jwt.decode(req.token).id;
+        let type = '';
+        this.benefitsService
+          .checkUserType(userID)
+          .then((info) => {
+            type = info[0].user_type;
+          })
+          .then(() => {
+            if (type !== 'admin') {
+              res.sendStatus(403);
+            } else {
+              this.benefitsService
+                .addBenefit(req.body.company, req.body.benefitTitle, req.body.benefitDesc, req.body.category)
+                .then((data) => res.json(data))
+                .catch((err) => res.status(500).json(err));
+            }
+          });
       }
     });
   }

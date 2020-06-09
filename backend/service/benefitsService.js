@@ -24,6 +24,25 @@ class BenefitsService {
       });
     });
   }
+  addBenefit(company, title, desc, category) {
+    return new Promise(async (resolve, reject) => {
+      let addBenefits = this.knex('benefits')
+        .insert({
+          company: company,
+          benefit_title: title,
+          benefit_description: desc,
+          category: category,
+        })
+        .into('benefits');
+      addBenefits
+        .then(() => {
+          resolve({ success: 1, msg: `New benefit: ${title} added` });
+        })
+        .catch((err) => {
+          reject({ success: 0, error: 'New benefit could not be added.' });
+        });
+    });
+  }
   editTitle(benefitId, newTitle) {
     return new Promise(async (resolve, reject) => {
       let titleChange = this.knex('benefits')
@@ -70,11 +89,11 @@ class BenefitsService {
       let activeChange = this.knex('benefits')
         .where('id', benefitId)
         .update({ active: newState });
-        activeChange
+      activeChange
         .then(() => {
           resolve({ success: 1, newState: newState });
         })
-        .catch(err => {
+        .catch((err) => {
           reject({ success: 0, error: 'Active state could not be changed.' });
         });
     });
