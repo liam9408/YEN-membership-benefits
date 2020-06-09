@@ -11,7 +11,7 @@ class LoginService {
   async login(email, password) {
     return new Promise(async (resolve, reject) => {
       let findUser = this.knex('members')
-        .select('id','f_name', 'l_name', 'password')
+        .select('id','f_name', 'l_name', 'password','user_type')
         .where('email', email);
       findUser.then(async (data) => {
         if (data.length === 0) {
@@ -25,7 +25,7 @@ class LoginService {
             const token = jwt.sign(payload, process.env.JWT_SECRET, {
               expiresIn: '30 days',
             });
-            resolve({ success: 1, token: token, id: data[0].id, fName:data[0].f_name, lName: data[0].l_name });
+            resolve({ success: 1, token: token, id: data[0].id, fName:data[0].f_name, lName: data[0].l_name, userType: data[0].user_type });
           } else {
             resolve({ success: 0, error: 'password not found' });
           }
@@ -42,7 +42,7 @@ class LoginService {
         } else {
           let hash = await bcrypt.hashPassword(password);
           let insertUser = this.knex
-            .returning(['id', 'f_name', 'l_name'])
+            .returning(['id', 'f_name', 'l_name', 'user_type'])
             .insert({
               f_name: fName,
               l_name: lName,
@@ -56,7 +56,7 @@ class LoginService {
               process.env.JWT_SECRET,
               { expiresIn: '30 days' }
             );
-            resolve({ success: 1, token: token, id: data[0].id, fName:data[0].f_name, lName: data[0].l_name });
+            resolve({ success: 1, token: token, id: data[0].id, fName:data[0].f_name, lName: data[0].l_name, userType:data[0].user_type });
           });
         }
       });
