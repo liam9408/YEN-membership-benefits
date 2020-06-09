@@ -25,7 +25,7 @@ class MemberRouter {
   router() {
     let router = express.Router();
     router.get('/info/:userid', verifyToken, this.info.bind(this));
-    router.post('/check-access', verifyToken, this.check.bind(this));
+    router.get('/check-access', verifyToken, this.check.bind(this));
     return router;
   }
   info(req, res) {
