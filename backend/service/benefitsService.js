@@ -24,7 +24,7 @@ class BenefitsService {
       });
     });
   }
-  addBenefit(company, title, desc, category) {
+  addBenefit(company, title, desc, category, file) {
     return new Promise(async (resolve, reject) => {
       let addBenefits = this.knex('benefits')
         .insert({

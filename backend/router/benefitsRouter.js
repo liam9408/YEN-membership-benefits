@@ -67,7 +67,7 @@ class BenefitsRouter {
               res.sendStatus(403);
             } else {
               this.benefitsService
-                .addBenefit(req.body.company, req.body.benefitTitle, req.body.benefitDesc, req.body.category)
+                .addBenefit(req.body.company, req.body.benefitTitle, req.body.benefitDesc, req.body.category, req.files)
                 .then((data) => res.json(data))
                 .catch((err) => res.status(500).json(err));
             }
