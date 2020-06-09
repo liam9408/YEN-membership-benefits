@@ -23,19 +23,66 @@ class BenefitsRouter {
 
   router() {
     let router = express.Router();
-    router.get('/list/all', verifyToken, this.all.bind(this));
+    router.get('/list/all', verifyToken, this.listAll.bind(this));
+    router.put('/edit-title', verifyToken, this.editTitle.bind(this));
+    router.put('/edit-description', verifyToken, this.editDescription.bind(this));
     return router;
   }
 
-  all(req, res) {
+
+  listAll(req, res) {
     jwt.verify(req.token, process.env.JWT_SECRET, (err) => {
       if (err) {
         res.sendStatus(403);
       } else {
+        // let info = jwt.decode(req.token).id
+        // console.log(info)
         return this.benefitsService
           .listAll(req.params.userid)
           .then((data) => res.json(data))
           .catch((err) => res.status(500).json(err));
+      }
+    });
+  }
+  editTitle(req, res) {
+    jwt.verify(req.token, process.env.JWT_SECRET, (err) => {
+      if (err) {
+        res.sendStatus(403);
+      } else {
+        let userID = jwt.decode(req.token).id;
+        let type = '';
+        this.benefitsService.checkUserType(userID).then((info) => {
+          type = info[0].user_type;
+        });
+        if (type !== 'admin') {
+          res.sendStatus(403);
+        } else {
+          this.benefitsService
+            .editTitle(req.body.benefitId, req.body.title)
+            .then((data) => res.json(data))
+            .catch((err) => res.status(500).json(err));
+        }
+      }
+    });
+  }
+  editDescription(req, res) {
+    jwt.verify(req.token, process.env.JWT_SECRET, (err) => {
+      if (err) {
+        res.sendStatus(403);
+      } else {
+        let userID = jwt.decode(req.token).id;
+        let type = '';
+        this.benefitsService.checkUserType(userID).then((info) => {
+          type = info[0].user_type;
+        });
+        if (type !== 'admin') {
+          res.sendStatus(403);
+        } else {
+          this.benefitsService
+            .editDescription(req.body.benefitId, req.body.description)
+            .then((data) => res.json(data))
+            .catch((err) => res.status(500).json(err));
+        }
       }
     });
   }
