@@ -23,7 +23,7 @@ class LoginRouter {
 
   signup(req, res) {
     return this.loginService
-      .signUp(req.body.fName, req.body.lName, req.body.email.toLowerCase(), req.body.password)
+      .signUp(req.body.fName, req.body.lName, req.body.userType, req.body.email.toLowerCase(), req.body.password)
       .then(data => res.json(data))
       .catch(err => res.status(500).json(err));
   }
