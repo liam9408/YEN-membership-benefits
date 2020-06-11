@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import * as benefitsActions from "../../../store/actions/benefits/benefitsActions";
-import { withRouter } from "react-router-dom";
 
 // ---- styling
 const cardBody = {
@@ -102,9 +101,11 @@ const leftText = {
 };
 
 const BenefitsList = (props) => {
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
-    props.refreshMDP();
-  }, []);
+    props.refreshMDP(token);
+  }, [props, token]);
 
   return (
     <>
@@ -114,7 +115,6 @@ const BenefitsList = (props) => {
             All membership benefits
           </h4>
           {props.benefitsMSP.map((item, index) => {
-            console.log(item);
             return (
               <>
                 <div id="cardBody" style={cardBody}>
@@ -154,7 +154,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    refreshMDP: (method) => dispatch(benefitsActions.loadBenefits(method)),
+    refreshMDP: (token) => dispatch(benefitsActions.loadBenefits(token)),
   };
 };
 

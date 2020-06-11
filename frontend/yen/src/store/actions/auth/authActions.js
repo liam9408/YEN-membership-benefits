@@ -25,10 +25,11 @@ export function loginThunk(email, password) {
       })
       .then((response) => {
         if (response.data.success === 1) {
-          console.log(response.data);
           // thunk can conditionally dispatch actions
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("id", response.data.id);
+          localStorage.setItem("fName", response.data.fName);
+          localStorage.setItem("lName", response.data.lName);
           dispatch(loginSuccessAction(response.data.token, response.data.id));
         } else {
           console.log("failed");

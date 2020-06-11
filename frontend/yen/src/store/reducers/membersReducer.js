@@ -1,10 +1,9 @@
 import * as membersActionsTypes from "../actions/members/membersActionTypes";
 
 const initialState = {
-  benefitsRootReducer: [
+  membersRootReducer: [
     {
-      f_name: "pending",
-      l_name: "pending",
+      user_type: "pending",
     },
   ],
 };
@@ -13,10 +12,9 @@ const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case membersActionsTypes.GETMEMBER:
       return {
-        benefitsRootReducer: [
+        membersRootReducer: [
           {
-            f_name: action.fName,
-            l_name: action.lName,
+            user_type: action.user_type,
           },
         ],
       };

@@ -1,35 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import * as authActions from "../../store/actions/auth/authActions";
 import { connect } from "react-redux";
 
-const schema = {
-  email: {
-    presence: { allowEmpty: false, message: "is required" },
-    email: true,
-    length: {
-      maximum: 64,
-    },
-  },
-  password: {
-    presence: { allowEmpty: false, message: "is required" },
-    length: {
-      maximum: 128,
-    },
-  },
-};
-
 const SignIn = (props) => {
-  const { history } = props;
-
-  const [formState, setFormState] = useState({
-    isValid: false,
-    values: {},
-    touched: {},
-    errors: {},
-  });
-
   const handleSignIn = (event) => {
     event.preventDefault();
     let email = event.target.email.value;
@@ -62,7 +37,5 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(authActions.loginThunk(email, password));
   },
 });
-
-// export default withRouter(SignIn);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

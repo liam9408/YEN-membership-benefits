@@ -10,12 +10,10 @@ export function refreshBenefitsThunk(benefits) {
 
 export function loadBenefits(token) {
   return (dispatch) => {
-    console.log("ran");
-    return axios(`${process.env.REACT_APP_API_SERVER}/benefits/list/all`, {
-      token: token,
+    return axios(`${process.env.REACT_APP_API_SERVER}/benefits/list/all/`, {
+      headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => {
-        console.log(res);
         dispatch(refreshBenefitsThunk(res.data));
       })
       .catch((err) => {

@@ -1,12 +1,12 @@
 // Require the necessary modules for this file.
-const express = require('express');
-const jwt = require('jsonwebtoken');
+const express = require("express");
+const jwt = require("jsonwebtoken");
 
 // Verify Token
 function verifyToken(req, res, next) {
   const bearerHeader = req.headers.authorization;
-  if (typeof bearerHeader !== 'undefined') {
-    const bearer = bearerHeader.split(' ');
+  if (typeof bearerHeader !== "undefined") {
+    const bearer = bearerHeader.split(" ");
     const bearerToken = bearer[1];
     req.token = bearerToken;
     next();
@@ -24,8 +24,8 @@ class MemberRouter {
   // Binding the stuff to the stuff
   router() {
     let router = express.Router();
-    router.get('/info/:userid', verifyToken, this.info.bind(this));
-    router.post('/check-access', verifyToken, this.check.bind(this));
+    router.get("/info/:userid", verifyToken, this.info.bind(this));
+    router.get("/check-access", verifyToken, this.check.bind(this));
     return router;
   }
   info(req, res) {
@@ -40,7 +40,7 @@ class MemberRouter {
         res.sendStatus(403);
       } else {
         let userID = jwt.decode(req.token).id;
-        let type = '';
+        let type = "";
         this.membersService
           .checkUserType(userID)
           .then((info) => res.json(info))

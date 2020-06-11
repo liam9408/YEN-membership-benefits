@@ -1,6 +1,5 @@
 import React from "react";
 import BenefitsList from "./BenefitsList";
-import { connect } from "react-redux";
 
 const Benefits = (props) => {
   return (

@@ -1,6 +1,5 @@
 import React from "react";
 import YenLogo from "./yenlogo.PNG";
-import { connect } from "react-redux";
 
 const cardBody = {
   display: "flex",
@@ -33,12 +32,15 @@ const membershipCardContainer = {
 };
 
 const Card = (props) => {
+  let fName = props.fName;
+  let lName = props.lName;
+
   return (
     <>
       <div style={cardBody} className="card-body">
         <div id="membershipCard" style={membershipCardContainer}>
           <img id="yenLogo" style={yenLogo} src={YenLogo} alt="yenLogo"></img>
-          <span style={memberName}>Chan Tai Ming</span>
+          <span style={memberName}>{fName + " " + lName}</span>
         </div>
       </div>
     </>

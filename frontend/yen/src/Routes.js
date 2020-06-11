@@ -1,13 +1,13 @@
 import React from "react";
 import { Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
 import { RouteWithLayout } from "./components";
 
 import {
   Home as HomeView,
   SignIn as SignInView,
   NotFound as NotFoundView,
+  Admin as AdminView,
 } from "./views";
 import { Normal as NormalLayout } from "./layouts";
 
@@ -23,6 +23,12 @@ const Routes = (props) => {
           exact
           layout={NormalLayout}
           path="/home"
+        />
+        <RouteWithLayout
+          component={AdminView}
+          exact
+          layout={NormalLayout}
+          path="/admin"
         />
         <RouteWithLayout
           component={NotFoundView}
