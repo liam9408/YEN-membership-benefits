@@ -24,11 +24,17 @@ class BenefitsRouter {
   router() {
     let router = express.Router();
     router.get('/list/all', verifyToken, this.listAll.bind(this));
+    router.post('/add-benefit', verifyToken, this.addBenefit.bind(this));
     router.put('/edit-title', verifyToken, this.editTitle.bind(this));
-    router.put('/edit-description', verifyToken, this.editDescription.bind(this));
+    router.put(
+      '/edit-description',
+      verifyToken,
+      this.editDescription.bind(this)
+    );
+    router.put('/edit-activity', verifyToken, this.editActivity.bind(this));
+    
     return router;
   }
-
 
   listAll(req, res) {
     jwt.verify(req.token, process.env.JWT_SECRET, (err) => {
@@ -44,6 +50,31 @@ class BenefitsRouter {
       }
     });
   }
+  addBenefit(req, res) {
+    jwt.verify(req.token, process.env.JWT_SECRET, (err) => {
+      if (err) {
+        res.sendStatus(403);
+      } else {
+        let userID = jwt.decode(req.token).id;
+        let type = '';
+        this.benefitsService
+          .checkUserType(userID)
+          .then((info) => {
+            type = info[0].user_type;
+          })
+          .then(() => {
+            if (type !== 'admin') {
+              res.sendStatus(403);
+            } else {
+              this.benefitsService
+                .addBenefit(req.body.company, req.body.benefitTitle, req.body.benefitDesc, req.body.category, req.files)
+                .then((data) => res.json(data))
+                .catch((err) => res.status(500).json(err));
+            }
+          });
+      }
+    });
+  }
   editTitle(req, res) {
     jwt.verify(req.token, process.env.JWT_SECRET, (err) => {
       if (err) {
@@ -51,17 +82,21 @@ class BenefitsRouter {
       } else {
         let userID = jwt.decode(req.token).id;
         let type = '';
-        this.benefitsService.checkUserType(userID).then((info) => {
-          type = info[0].user_type;
-        });
-        if (type !== 'admin') {
-          res.sendStatus(403);
-        } else {
-          this.benefitsService
-            .editTitle(req.body.benefitId, req.body.title)
-            .then((data) => res.json(data))
-            .catch((err) => res.status(500).json(err));
-        }
+        this.benefitsService
+          .checkUserType(userID)
+          .then((info) => {
+            type = info[0].user_type;
+          })
+          .then(() => {
+            if (type !== 'admin') {
+              res.sendStatus(403);
+            } else {
+              this.benefitsService
+                .editTitle(req.body.benefitId, req.body.title)
+                .then((data) => res.json(data))
+                .catch((err) => res.status(500).json(err));
+            }
+          });
       }
     });
   }
@@ -72,17 +107,46 @@ class BenefitsRouter {
       } else {
         let userID = jwt.decode(req.token).id;
         let type = '';
-        this.benefitsService.checkUserType(userID).then((info) => {
-          type = info[0].user_type;
-        });
-        if (type !== 'admin') {
-          res.sendStatus(403);
-        } else {
-          this.benefitsService
-            .editDescription(req.body.benefitId, req.body.description)
-            .then((data) => res.json(data))
-            .catch((err) => res.status(500).json(err));
-        }
+        this.benefitsService
+          .checkUserType(userID)
+          .then((info) => {
+            type = info[0].user_type;
+          })
+          .then(() => {
+            if (type !== 'admin') {
+              res.sendStatus(403);
+            } else {
+              this.benefitsService
+                .editActiveness(req.body.benefitId)
+                .then((data) => res.json(data))
+                .catch((err) => res.status(500).json(err));
+            }
+          });
+      }
+    });
+  }
+  editActivity(req, res) {
+    jwt.verify(req.token, process.env.JWT_SECRET, (err) => {
+      if (err) {
+        res.sendStatus(403);
+      } else {
+        let userID = jwt.decode(req.token).id;
+        let type = '';
+        this.benefitsService
+          .checkUserType(userID)
+          .then(async (info) => {
+            type = info[0].user_type;
+          })
+          .then(() => {
+            if (type !== 'admin') {
+              res.sendStatus(403);
+            } else {
+              this.benefitsService
+                .editActiveness(req.body.benefitId)
+                .then((data) => res.json(data))
+                .catch((err) => res.status(500).json(err));
+            }
+          });
       }
     });
   }

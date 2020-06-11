@@ -33,7 +33,7 @@ class LoginService {
       });
     });
   }
-  async signUp(fName, lName, email, password) {
+  async signUp(fName, lName,userType, email, password) {
     return new Promise((resolve, reject) => {
       let userCheck = this.knex('members').select('*').where('email', email);
       userCheck.then(async (data) => {
@@ -46,13 +46,14 @@ class LoginService {
             .insert({
               f_name: fName,
               l_name: lName,
+              user_type:userType,
               email: email,
               password: hash,
             })
             .into('members');
           insertUser.then((data) => {
             const token = jwt.sign(
-              { userId: data[0].id },
+              { id: data[0].id },
               process.env.JWT_SECRET,
               { expiresIn: '30 days' }
             );
