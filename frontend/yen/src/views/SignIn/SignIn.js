@@ -14,12 +14,21 @@ const SignIn = (props) => {
 
   return (
     <>
-      <h1>Sign In</h1>
-      <form onSubmit={handleSignIn}>
-        <input label="Email address" name="email" placeholder="email"></input>
-        <input label="Password" name="password" placeholder="password"></input>
-        <button type="submit">Log In</button>
-      </form>
+      <div id="sign-in-body">
+        <div id="yen-logo-main"></div>
+        <h1>YEN HK</h1>
+        <form onSubmit={handleSignIn} className="form-container">
+          <input label="Email address" name="email" placeholder="email"></input>
+          <input
+            label="Password"
+            name="password"
+            placeholder="password"
+          ></input>
+          <button id="sign-in-button" type="submit">
+            Log In
+          </button>
+        </form>
+      </div>
     </>
   );
 };

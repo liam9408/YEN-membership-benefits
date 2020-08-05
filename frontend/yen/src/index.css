@@ -22,6 +22,54 @@ code {
   }
 }
 
+@media only screen and (max-width: 400px) {
+  #alignContainer {
+    width: 90% !important;
+  }
+  #membershipCard {
+    width: 300px !important;
+    height: 170px !important;
+  }
+  #member-name {
+    font-size: 15px !important;
+    margin-bottom: 40px !important;
+  }
+  .benefits-image {
+    margin-left: 10px !important;
+    margin-right: 20px !important;
+  }
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
+  #alignContainer {
+    width: 90% !important;
+  }
+  #membershipCard {
+    width: 300px !important;
+    height: 170px !important;
+  }
+  #member-name {
+    font-size: 15px !important;
+    margin-bottom: 40px !important;
+  }
+  .benefits-image {
+    margin-left: 10px !important;
+    margin-right: 20px !important;
+  }
+  input {
+    width: 250px !important;
+    height: 40px !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    font-size: 20px;
+  }
+}
+
+.benefits-description-text {
+  line-height: 20px;
+}
+
 #membershipCard {
   width: 480px;
   height: 280px;
@@ -45,4 +93,46 @@ code {
   -moz-box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.08);
   box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.08);
   transition: ease-in-out 0.3s;
+}
+
+#sign-in-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#yen-logo-main {
+  background-image: url("./views/SignIn/yen.PNG");
+  width: 150px;
+  height: 150px;
+  background-size: cover;
+  margin-top: 50px;
+}
+
+input {
+  width: 400px;
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  font-size: 20px;
+}
+
+#sign-in-button {
+  background-color: rgb(159, 133, 124);
+  width: 150px;
+  height: 50px;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+  border: none;
 }

@@ -30,6 +30,7 @@ export function loginThunk(email, password) {
           localStorage.setItem("id", response.data.id);
           localStorage.setItem("fName", response.data.fName);
           localStorage.setItem("lName", response.data.lName);
+          console.log(response.data.token);
           dispatch(loginSuccessAction(response.data.token, response.data.id));
         } else {
           console.log("failed");
