@@ -60,6 +60,11 @@ const CardBody = styled.div`
   margin-top: 20px;
 `;
 
+const Line = styled.hr`
+  border: 0.5px solid #dcdcdc;
+  width: 100%;
+`;
+
 const BenefitItem = ({ item, ...props }) => {
   return (
     <CardBody>
@@ -74,6 +79,7 @@ const BenefitItem = ({ item, ...props }) => {
             <Description>{item.benefits_description}</Description>
           </BenefitDetails>
         </BenefitsContent>
+        <Line />
       </BenefitsCardBody>
     </CardBody>
   );

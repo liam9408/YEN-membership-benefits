@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import * as membersActions from "../../store/actions/members/membersActions";
 import styled from "styled-components";
 import { Formik, Field, Form } from "formik";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Title = styled.h1``;
 
@@ -42,6 +45,40 @@ const Admin = (props) => {
 
   let isAdmin = props.membersMSP && props.membersMSP[0].user_type;
 
+  const addBenefits = (values) => {
+    return axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_SERVER}/benefits/add-benefit`,
+      data: values,
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
+      .then((res) => {
+        toast.success("Benefit added successfully");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const addUser = (values) => {
+    return axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_SERVER}/benefits/add-benefit`,
+      data: values,
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
+      .then((res) => {
+        toast.success("User added successfully");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   //   if (isAdmin !== "admin") {
   //     return (
   //       <React.Fragment>
@@ -51,15 +88,21 @@ const Admin = (props) => {
   //   } else {
   return (
     <Container>
-      <Title>Admin Page</Title>
+      <ToastContainer />
+      <Title>YEN Admin</Title>
       <Forms>
         <FormBody>
           <SubTitle>Add Benefit</SubTitle>
           <Formik
-            initialValues={{ name: "", email: "" }}
+            initialValues={{
+              company: "",
+              benefitTitle: "",
+              benefitDesc: "",
+              category: "",
+              files: "",
+            }}
             onSubmit={async (values) => {
-              await new Promise((resolve) => setTimeout(resolve, 500));
-              alert(JSON.stringify(values, null, 2));
+              await new Promise((resolve) => addBenefits(values));
             }}
           >
             <StyledForm>
@@ -76,18 +119,21 @@ const Admin = (props) => {
         <FormBody>
           <SubTitle>Add User</SubTitle>
           <Formik
-            initialValues={{ name: "", email: "" }}
+            initialValues={{
+              fName: "",
+              lName: "",
+              email: "",
+              password: "",
+            }}
             onSubmit={async (values) => {
-              await new Promise((resolve) => setTimeout(resolve, 500));
-              alert(JSON.stringify(values, null, 2));
+              await new Promise((resolve) => addUser(values));
             }}
           >
             <StyledForm>
-              <Field placeholder="Company" name="company" type="text" />
-              <Field placeholder="Title" name="benefitTitle" type="text" />
-              <Field placeholder="Description" name="benefitDesc" type="text" />
-              <Field placeholder="Category" name="category" type="text" />
-              <Field placeholder="Files" name="files" type="text" />
+              <Field placeholder="First Name" name="fName" type="text" />
+              <Field placeholder="Last Name" name="lName" type="text" />
+              <Field placeholder="Email" name="email" type="text" />
+              <Field placeholder="Password" name="password" type="password" />
               <SubmitButton type="submit">Submit</SubmitButton>
             </StyledForm>
           </Formik>

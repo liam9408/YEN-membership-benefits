@@ -61,8 +61,8 @@ const YENLogo = styled.img`
 `;
 
 const MemberInfo = styled.span`
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 400;
   color: white;
   margin-left: 20px;
   margin-bottom: 80px;
@@ -78,12 +78,38 @@ const MemberInfo = styled.span`
   }
 `;
 
+const MembershipCardTitle = styled.span`
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  margin-top: 70px;
+
+  @media only screen and (max-width: 400px) {
+    font-size: 15px !important;
+    margin-top: 10px !important;
+  }
+
+  @media only screen and (max-width: 768px) {
+    margin-top: 30px !important;
+  }
+
+  @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
+    font-size: 15px !important;
+    margin-top: 20px;
+  }
+`;
+
 const Card = ({ fName, lName, ...props }) => {
   return (
     <>
       <CardBody>
         <MembershipCard>
           <YENLogo src={YenLogo} alt="yenLogo"></YENLogo>
+          <MembershipCardTitle>
+            YEN Hong Kong Membership Card
+          </MembershipCardTitle>
           <MemberInfo>{fName + " " + lName}</MemberInfo>
         </MembershipCard>
       </CardBody>

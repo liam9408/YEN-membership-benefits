@@ -18,6 +18,7 @@ const Home = ({ ...props }) => {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => {
+        console.log(res);
         setBenefits(res.data);
       })
       .catch((err) => {
