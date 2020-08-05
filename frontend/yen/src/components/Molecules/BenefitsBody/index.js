@@ -26,9 +26,9 @@ const BenefitsBody = ({ benefits, searchText, filterText, ...props }) => {
     <React.Fragment>
       {benefits.map((item, index) => {
         return (
-          <React.Fragment>
+          <>
             <BenefitItem item={item} />
-          </React.Fragment>
+          </>
         );
       })}
     </React.Fragment>

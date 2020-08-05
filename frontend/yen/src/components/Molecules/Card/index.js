@@ -39,17 +39,17 @@ const MembershipCard = styled.div`
 
   @media only screen and (max-width: 768px) {
     width: 400px !important;
-    height: 235px !important;
+    height: 250px !important;
   }
 
   @media only screen and (max-width: 400px) {
     width: 300px !important;
-    height: 170px !important;
+    height: 190px !important;
   }
 
   @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
     width: 300px !important;
-    height: 170px !important;
+    height: 190px !important;
   }
 `;
 
@@ -58,6 +58,21 @@ const YENLogo = styled.img`
   height: 80px;
   margin-top: 20px;
   margin-left: 20px;
+
+  @media only screen and (max-width: 768px) {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  @media only screen and (max-width: 400px) {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
+    width: 40px !important;
+    height: 40px !important;
+  }
 `;
 
 const MemberInfo = styled.span`

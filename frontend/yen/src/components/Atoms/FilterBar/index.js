@@ -77,13 +77,6 @@ const FilterBar = ({ filterText, setFilterText, ...props }) => {
         })}
       </OptionsContainer>
     </React.Fragment>
-    // <form>
-    //   <input
-    //     type="text"
-    //     onChange={handleChange}
-    //     value={filteredText}
-    //   />
-    // </form>
   );
 };
 

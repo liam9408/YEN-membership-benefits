@@ -14,10 +14,6 @@ const BenefitsCard = styled.div`
   width: 100%;
 `;
 
-const Title = styled.h4`
-  text-align: left;
-`;
-
 const AlignContainer = styled.div`
   display: flex;
   flex-direction: column;

@@ -34,6 +34,18 @@ const FormBody = styled.div`
 const Forms = styled.div`
   display: flex;
   flex-direction: row;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column !important;
+  }
+
+  @media only screen and (max-width: 400px) {
+    flex-direction: column !important;
+  }
+
+  @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
+    flex-direction: column !important;
+  }
 `;
 
 const Admin = (props) => {
