@@ -1,36 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
 import BenefitItem from "../../Atoms/BenefitItem";
 
-const AlignContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 50%;
-
-  @media only screen and (max-width: 768px) {
-    width: 80% !important;
+const BenefitsBody = ({ benefits, searchText, filterText, ...props }) => {
+  if (searchText.length) {
+    const param = searchText.toLowerCase();
+    const arr = [...benefits];
+    const data = arr.filter(function (item) {
+      return item.company.toLowerCase().includes(param);
+    });
+    benefits = data;
   }
 
-  @media only screen and (max-width: 400px) {
-    width: 90% !important;
+  if (filterText !== "All") {
+    const param = filterText.toLowerCase();
+    const arr = [...benefits];
+    const data = arr.filter(function (item) {
+      return item.category.toLowerCase().includes(param);
+    });
+    benefits = data;
   }
 
-  @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
-    width: 90% !important;
-  }
-`;
-
-const Title = styled.h4`
-  text-align: left;
-`;
-
-const BenefitsBody = ({ benefits, ...props }) => {
   return (
-    <AlignContainer>
-      <Title>All membership benefits</Title>
+    <React.Fragment>
       {benefits.map((item, index) => {
         return (
           <React.Fragment>
@@ -38,7 +31,7 @@ const BenefitsBody = ({ benefits, ...props }) => {
           </React.Fragment>
         );
       })}
-    </AlignContainer>
+    </React.Fragment>
   );
 };
 

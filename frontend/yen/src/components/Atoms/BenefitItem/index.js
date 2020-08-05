@@ -25,21 +25,45 @@ const BenefitsTitle = styled.h1`
   margin-right: 20px;
   margin-bottom: 10px;
   margin-top: 20px;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 400;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 15px;
+  }
+
+  @media only screen and (max-width: 400px) {
+    font-size: 15px;
+  }
+
+  @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
+    font-size: 15px;
+  }
 `;
 
 const BenefitsText = styled.h5`
   margin-bottom: 10px;
   margin-top: 10px;
-  font-size: 15px;
+  font-size: 20px;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 15px;
+  }
+
+  @media only screen and (max-width: 400px) {
+    font-size: 15px;
+  }
+
+  @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
+    font-size: 15px;
+  }
 `;
 
 const Description = styled.p`
   margin-top: 0px;
   margin-bottom: 20px;
-  font-size: 13px;
-  font-weight: 300;
+  font-size: 15px;
+  font-weight: 400;
   line-height: 20px;
 `;
 
