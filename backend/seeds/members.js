@@ -9,6 +9,7 @@ exports.seed = function (knex) {
           id: 1,
           f_name: "YEN",
           l_name: "HK",
+          user_type:'admin',
           email: "test",
           password:
             "$2b$10$olpOziQ6jAfmid4ZttvxzOC4up0Q9xfUxJw/1ZPg/XqzsPDhOtKnu",

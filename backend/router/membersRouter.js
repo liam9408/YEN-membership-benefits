@@ -22,11 +22,11 @@ class MemberRouter {
   }
 
   // Binding the stuff to the stuff
-  router() {
+  router({ authUser, authAdmin }) {
     let router = express.Router();
-    router.get("/info/:userid", verifyToken, this.info.bind(this));
-    router.get("/check-access", verifyToken, this.check.bind(this));
-    router.delete("/delete-user", verifyToken, this.delUser.bind(this));
+    router.get("/info/:userid", authUser, this.info.bind(this));
+    router.get("/check-access", authUser, this.check.bind(this));
+    router.delete("/delete-user", authAdmin, this.delUser.bind(this));
     return router;
   }
   info(req, res) {
@@ -36,44 +36,19 @@ class MemberRouter {
       .catch((err) => res.status(500).json(err));
   }
   check(req, res) {
-    jwt.verify(req.token, process.env.JWT_SECRET, (err) => {
-      if (err) {
-        res.sendStatus(403);
-      } else {
-        let userID = jwt.decode(req.token).id;
-        let type = "";
-        this.membersService
-          .checkUserType(userID)
-          .then((info) => res.json(info))
-          .catch((err) => res.status(500).json(err));
-      }
-    });
+    let userID = jwt.decode(req.token).id;
+    let type = "";
+    this.membersService
+      .checkUserType(userID)
+      .then((info) => res.json(info))
+      .catch((err) => res.status(500).json(err));
   }
 
   delUser(req, res) {
-    jwt.verify(req.token, process.env.JWT_SECRET, (err) => {
-      if (err) {
-        res.sendStatus(403);
-      } else {
-        let userID = jwt.decode(req.token).id;
-        let type = "";
-        this.membersService
-          .checkUserType(userID)
-          .then((info) => {
-            type = info[0].user_type;
-          })
-          .then(() => {
-            if (type !== "admin") {
-              res.sendStatus(403);
-            } else {
-              this.membersService
-                .deleteUser(req.body.userId)
-                .then((data) => res.json(data))
-                .catch((err) => res.status(500).json(err));
-            }
-          });
-      }
-    });
+    this.membersService
+      .deleteUser(req.body.userId)
+      .then((data) => res.json(data))
+      .catch((err) => res.status(500).json(err));
   }
 }
 

@@ -7,6 +7,13 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+const { auth, adminAuth } = require('./middleware');
+
+const authUser = auth()
+const authAdmin = adminAuth()
+
+
+
 // ---------- package setup
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -42,9 +49,9 @@ const membersService = new MembersService(knex);
 const PORT = process.env.PORT;
 
 // ---------- routing
-app.use("/login", new loginRouter(loginService).router());
-app.use("/members", new membersRouter(membersService).router());
-app.use("/benefits", new benefitsRouter(benefitsService).router());
+app.use("/login", new loginRouter(loginService).router({authUser, authAdmin}));
+app.use("/members", new membersRouter(membersService).router({authUser, authAdmin}));
+app.use("/benefits", new benefitsRouter(benefitsService).router({authUser, authAdmin}));
 
 app.get("/", (req, res) => {
   res.send("YEN backend server");
