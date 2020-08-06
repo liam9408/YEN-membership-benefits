@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 // import { BrowserRouter as Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import Routes from "./Routes";
@@ -9,9 +9,13 @@ export default class App extends Component {
   render() {
     return (
       <>
-        <Router history={browserHistory}>
+        <BrowserRouter
+          history={browserHistory}
+          basename={"/"}
+          // basename={"https://yenhk-member.surge.sh/"}
+        >
           <Routes />
-        </Router>
+        </BrowserRouter>
       </>
     );
   }
